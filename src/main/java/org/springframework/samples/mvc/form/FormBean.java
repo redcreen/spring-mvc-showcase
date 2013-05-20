@@ -16,30 +16,29 @@ import org.springframework.samples.mvc.convert.MaskFormat;
 
 public class FormBean {
 	
-	@NotEmpty
+	
 	private String name;
 	
-	@Min(21)
+	
 	private int age;
 
-	@DateTimeFormat(iso=ISO.DATE)
-	@Past
+	
 	private Date birthDate;
 
-	@MaskFormat("(###) ###-####")
+	
 	private String phone;
 
-	@NumberFormat(pattern="$###,###.00")
+	
 	private BigDecimal currency;
 
-	@NumberFormat(style=Style.PERCENT)
+	
 	private BigDecimal percent;
 	
 	private InquiryType inquiry;
 	
 	private String inquiryDetails;
 	
-	private boolean subscribeNewsletter;
+	private boolean subscribeNewsletter = true;
 	
 	private Map<String, String> additionalInfo;
 

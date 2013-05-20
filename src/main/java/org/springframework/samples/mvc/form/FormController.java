@@ -20,6 +20,11 @@ public class FormController {
 
 	// Invoked on every request
 
+	/**
+	 * 用@ModelAttribute修饰过的，会在执行具体的方法前先执行此方法
+	 * @param request
+	 * @param model
+	 */
 	@ModelAttribute
 	public void ajaxAttribute(WebRequest request, Model model) {
 		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
@@ -38,12 +43,11 @@ public class FormController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public String processSubmit(@Valid FormBean formBean, BindingResult result, 
-								@ModelAttribute("ajaxRequest") boolean ajaxRequest, 
-								Model model, RedirectAttributes redirectAttrs) {
-		if (result.hasErrors()) {
-			return null;
-		}
+	public String processSubmit( FormBean formBean, BindingResult result, boolean ajaxRequest, 
+			Model model, RedirectAttributes redirectAttrs) {
+//		if (result.hasErrors()) {
+//			return null;
+//		}
 		// Typically you would save to a db and clear the "form" attribute from the session 
 		// via SessionStatus.setCompleted(). For the demo we leave it in the session.
 		String message = "Form submitted successfully.  Bound " + formBean;

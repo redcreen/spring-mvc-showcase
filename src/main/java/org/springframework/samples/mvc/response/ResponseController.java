@@ -10,31 +10,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value="/response", method=RequestMethod.GET)
 public class ResponseController {
 
-	@RequestMapping("/annotation")
+	@RequestMapping(value="/response/annotation", method=RequestMethod.GET)
 	public @ResponseBody String responseBody() {
 		return "The String ResponseBody";
 	}
 
-	@RequestMapping("/charset/accept")
+	@RequestMapping(value="/response/charset/accept", method=RequestMethod.GET)
 	public @ResponseBody String responseAcceptHeaderCharset() {
-		return "\u3053\u3093\u306b\u3061\u306f\u4e16\u754c\uff01 (\"Hello world!\" in Japanese)";
+		return "中国，小日本！ (\"Hello world!\" in China)";
 	}
 
-	@RequestMapping(value="/charset/produce", produces="text/plain;charset=UTF-8")
+	@RequestMapping(value="/response/charset/produce", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public @ResponseBody String responseProducesConditionCharset() {
-		return "\u3053\u3093\u306b\u3061\u306f\u4e16\u754c\uff01 (\"Hello world!\" in Japanese)";
+		return "小美！ (\"Hello world!\" in USA)";
 	}
 
-	@RequestMapping("/entity/status")
+	@RequestMapping(value="/response/entity/status", method=RequestMethod.GET)
 	public ResponseEntity<String> responseEntityStatusCode() {
 		return new ResponseEntity<String>("The String ResponseBody with custom status code (403 Forbidden)",
 				HttpStatus.FORBIDDEN);
 	}
 
-	@RequestMapping("/entity/headers")
+	@RequestMapping(value="/response/entity/headers", method=RequestMethod.GET)
 	public ResponseEntity<String> responseEntityCustomHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.TEXT_PLAIN);

@@ -32,7 +32,7 @@ public class ViewsController {
 		return "views/html";
 	}
 
-	@RequestMapping(value="dataBinding/{foo}/{fruit}", method=RequestMethod.GET)
+	@RequestMapping(value="dataBinding/{foo}/{fruit}")
 	public String dataBinding(@Valid JavaBean javaBean, Model model) {
 		// JavaBean "foo" and "fruit" properties populated from URI variables 
 		return "views/dataBinding";

@@ -18,15 +18,18 @@ public class FileUploadController {
 
 	@ModelAttribute
 	public void ajaxAttribute(WebRequest request, Model model) {
+		System.out.println(request + "-------------------1-------------------------" + AjaxUtils.isAjaxRequest(request));
 		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
 	public void fileUploadForm() {
+		System.out.println("-------------------2-------------------------");
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
 	public void processUpload(@RequestParam MultipartFile file, Model model) throws IOException {
+		System.out.println("-------------------3-------------------------");
 		model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
 	}
 	

@@ -1,9 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" >
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
+
+<link  href="<c:url value="/resources/validate/css/validate.css" />" type="text/css" rel="stylesheet" />	
+<script src="<c:url value="/resources/validate/talent-validate-all-min.js" />" language="javascript"></script>
+
+
 <c:if test="${!ajaxRequest}">
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <head>
 	<title>forms | mvc-showcase</title>
 	<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
@@ -34,31 +42,37 @@
 		  			Name <form:errors path="name" cssClass="error" />
 		 		</form:label>
 		  		<form:input path="name" />
+		  		<br/>
 	
 		  		<form:label path="age">
 		  			Age <form:errors path="age" cssClass="error" />
 		 		</form:label>
 		  		<form:input path="age" />
+		  		<br/>
 		  		
 		  		<form:label path="birthDate">
 		  			Birth Date (in form yyyy-mm-dd) <form:errors path="birthDate" cssClass="error" />
 		 		</form:label>
 		  		<form:input path="birthDate" />
+		  		<br/>
 		  		 
 		  		<form:label path="phone">
 		  			Phone (in form (###) ###-####) <form:errors path="phone" cssClass="error" />
 		  		</form:label>
 		  		<form:input path="phone" />
+		  		<br/>
 	
 		  		<form:label path="currency">
 		  			Currency (in form $#.##) <form:errors path="currency" cssClass="error" />
 		  		</form:label>
 		  		<form:input path="currency" />
+		  		<br/>
 	
 		  		<form:label path="percent">
 		  			Percentage (in form ##%) <form:errors path="percent" cssClass="error" />
 		  		</form:label>
 		  		<form:input path="percent" />
+		  		<br/>
 	
 		  	</fieldset>
 	
@@ -72,11 +86,13 @@
 					<form:option value="feedback">Feedback</form:option>
 					<form:option value="suggestion">Suggestion</form:option>
 				</form:select>
+				<br/>
 				
 		  		<form:label path="inquiryDetails">
 		  			Details
 		  		</form:label>
 		  		<form:textarea path="inquiryDetails" />
+		  		<br/>
 		  	</fieldset>
 	
 			<fieldset class="checkbox">
@@ -95,14 +111,28 @@
 		</form:form>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#form").submit(function() {  
+				$("#form").submit(function() {
+					if (!tt.validate()){
+						return false;
+					}
+					
 					$.post($(this).attr("action"), $(this).serialize(), function(html) {
 						$("#formsContent").replaceWith(html);
 						$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);
 					});
 					return false;  
-				});			
+				});
+				
+				registerValidate();
 			});
+			
+			function registerValidate() {
+				tt.vf.req.add("name","age");
+				new tt.NRV().set(10,150).add("age");
+				new tt.DV().add("birthDate");
+				new tt.LV().set(5,500).add("inquiryDetails");
+				new tt.SCV().set(1, 1).add("subscribeNewsletter");
+			}
 		</script>
 	</div>
 <c:if test="${!ajaxRequest}">

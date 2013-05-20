@@ -44,7 +44,6 @@
 }
 
 .cleanform input, .cleanform textarea, .cleanform select {
-	display:block;
 	margin-bottom:1em;
 	font-size:1em;
 	border:1px solid #bbb;

@@ -1,10 +1,7 @@
 package org.springframework.samples.mvc.mapping;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class JavaBean {
-
+	
 	private String foo = "bar";
 
 	private String fruit = "apple";
@@ -23,11 +20,6 @@ public class JavaBean {
 
 	public void setFruit(String fruit) {
 		this.fruit = fruit;
-	}
-
-	@Override
-	public String toString() {
-		return "JavaBean {foo=[" + foo + "], fruit=[" + fruit + "]}";
 	}
 
 }
